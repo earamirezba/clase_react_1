@@ -5,13 +5,20 @@ const objForm = {name: "", lastname:"", phone:"", mail:""}
 export default class PersonForm extends Component{
     constructor(props){
         super(props);
-        console.log(this.props.mensaje);
         
-        this.state = {
-            form: objForm
+        if(this.props.personUpdate.id !== ""){
+            this.state = {
+                form: this.props.personUpdate
+            }
+        }else{
+            this.state = {
+                form: objForm
+            }
         }
+
+        
         this.handleValue = this.handleValue.bind(this);
-        this.handlerSubmit=this.handlerSubmit.bind(this)
+        this.handlerSubmit=this.handlerSubmit.bind(this);
     }
 
     handleValue(e){
@@ -19,7 +26,6 @@ export default class PersonForm extends Component{
         this.setState({
             form: {...form, [e.target.name]: e.target.value}
         });
-        console.log(form);
 
         /*
         this.setState({
@@ -30,9 +36,12 @@ export default class PersonForm extends Component{
     }
     
     handlerSubmit(e){
-        console.log(e);
         e.preventDefault();
-        console.table(this.state);
+        this.setState({
+            form: objForm
+        })
+        let objPerson = this.state.form;
+        this.props.addPerson(objPerson);
     }
     render(){
         return(

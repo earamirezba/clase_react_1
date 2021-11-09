@@ -10,6 +10,8 @@ export default class PersonTable extends Component{
         console.table(this.props.people);
     }
 
+
+
     render( ){
         return(
             <>
@@ -20,6 +22,7 @@ export default class PersonTable extends Component{
                         <th>Apellido</th>
                         <th>Telefono</th>
                         <th>Email</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,7 +31,7 @@ export default class PersonTable extends Component{
                         this.props.people.map(
                             (objPerson)=>{
                                 return(
-                                    <PersonRow data={objPerson} />
+                                    <PersonRow deletePerson={this.props.deletePerson} data={objPerson} key={objPerson.mail} />
 
                                 );
                                 
